@@ -330,7 +330,17 @@ BasicGame.Game.prototype = {
 
         if (this.tiempo == 0 || this.outs == 3) {
             this.game.score = this.score;
-            this.recursiveSetScore(0, this.score);
+
+            var storageAvailable = true;
+            try{
+                console.log("es: "+localStorage);
+            }
+            catch(exception){
+                storageAvailable = false;
+            }
+            if(storageAvailable){
+                this.recursiveSetScore(0, this.score);
+            }
             this.quitGame();
         }
     },

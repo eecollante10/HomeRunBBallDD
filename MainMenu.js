@@ -58,7 +58,14 @@ BasicGame.MainMenu.prototype = {
 
 		var scores = [];
 
-		for (var i = 0; i < 10; i++) {
+		var storageAvailable = true
+		try{
+			console.log("es : "+localStorage);
+		}
+		catch(exception){
+			storageAvailable = false
+		}
+		for (var i = 0; i < 10 && storageAvailable; i++) {
 			var item = localStorage.getItem('item' + i);
 			if (!item) {
 				scores.push("0");
@@ -83,7 +90,7 @@ BasicGame.MainMenu.prototype = {
 			});
 		}
 
-		for (var i = 0; i < 5; i++) {
+		for (var i = 0; i < 5 && i < scores.length; i++) {
 			if (scores[0] == "" + this.game.score && i == 0 && this.game.score != 0) {
 				this.add.text(210, 220 + (i * 22), (i + 1) + " - " + scores[i], {
 					font: "18px Arial",
@@ -104,7 +111,7 @@ BasicGame.MainMenu.prototype = {
 				});
 			}
 		}
-		for (var i = 0; i < 5; i++) {
+		for (var i = 0; i < 5 && i<scores.length; i++) {
 			this.add.text(340, 220 + (i * 22), (i + 6) + " - " + scores[i + 5], {
 				font: "18px Arial",
 				fill: "#fff644",
